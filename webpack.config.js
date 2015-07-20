@@ -4,6 +4,14 @@ the Gulpfile for building our app.
 Does not need gulp in order to do so,
 but we use gulp to orchestrate
  */
+var gulp = require('gulp');
+var webpack = require('webpack-stream');
+gulp.task('default', function() {
+  return gulp.src('src/entry.js')
+    .pipe(webpack())
+    .pipe(gulp.dest('dist/'));
+});
+
 module.exports = {
   output: {
     filename: 'bundle.js'
@@ -15,7 +23,7 @@ module.exports = {
     loaders: [
       { test: /\.html$/, loader: 'raw' },
       { test: /\.styl$/, loader: 'css!style!stylus' },
-      // TODO: create loader for .js filest ransfroming from ES2015 to ES5
+      {test: /\.scri$/, loader: 'babel'}
     ]
   },
 
